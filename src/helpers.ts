@@ -14,7 +14,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 import { AnyJson, AnyLogger } from './types';
-import { murmurHash64 } from 'murmurhash-native';
+import * as murmurhash from 'murmurhash'
 
 /**
  * Performs JSON.stringify on a given input taking into account
@@ -98,5 +98,5 @@ export function signature(
     channel: string,
     payload: any,
 ): string {
-    return murmurHash64(JSON.stringify([processId, channel, payload]));
+    return murmurhash.v2(JSON.stringify([processId, channel, payload])).toString()
 }
